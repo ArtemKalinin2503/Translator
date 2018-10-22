@@ -6,7 +6,7 @@ const Word = mongoose.model('Word');
 
 //Подключим БД
 export function setUpConnection() { //word - это имя БД (порт 27017 - это порт для запуска mongodb по-умолчанию)
-    mongoose.connect('mongodb://localhost/word',  function (err) {
+    mongoose.connect('mongodb://localhost/word', {useNewUrlParser:true},  function (err) {
         if (err) throw err;
         console.log('Successfully connected!!!!!');
     }); 

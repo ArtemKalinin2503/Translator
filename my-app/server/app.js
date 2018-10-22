@@ -19,6 +19,7 @@ app.get('/word', (req,res) => {
 
 //Запрос post будет добавлять данные из БД word
 app.post('/word', (req,res) => {
+    console.log('!!!!!!!');
     db.createWord(req.body).then(data => res.send(data)); //Запрос createWord (описаный в DataBaseUtils.js) - будет создавать тело запроса и записывать результат
     //Создадим запись в Бд word
     db.createWord({title:'test', text: 'test'});
