@@ -5,8 +5,11 @@ import '../models/word'; //импортируем схему
 const Word = mongoose.model('Word');
 
 //Подключим БД
-export function setUpConnection() {
-    mongoose.connect('mongodb://localhost/word'); //word - это имя БД (порт 27017 - это порт для запуска mongodb по-умолчанию)
+export function setUpConnection() { //word - это имя БД (порт 27017 - это порт для запуска mongodb по-умолчанию)
+    mongoose.connect('mongodb://localhost/word',  function (err) {
+        if (err) throw err;
+        console.log('Successfully connected!!!!!');
+    }); 
 }
 
 //Напишем запрос к БД

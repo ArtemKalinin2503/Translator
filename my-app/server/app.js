@@ -20,14 +20,22 @@ app.get('/word', (req,res) => {
 //Запрос post будет добавлять данные из БД word
 app.post('/word', (req,res) => {
     db.createWord(req.body).then(data => res.send(data)); //Запрос createWord (описаный в DataBaseUtils.js) - будет создавать тело запроса и записывать результат
+    //Создадим запись в Бд word
+    db.createWord({title:'test', text: 'test'});
+    console.log('First entry');
+    //Создадим запись в Бд word
+    db.createWord({title:'test2', text: 'test2'});
+    console.log('Two entry');
+    db.createWord({title:'test3', text: 'test3'});
+    console.log('Three entry');
 });
 
 //Запрос delete будет удалять данные из БД word
-app.delete('/word/:id', (req,res) => {
+app.delete('/words/:id', (req,res) => {
     db.deleteWord(req.params.id).then(data => res.send(data)); //Запрос deleteWord (описаный в DataBaseUtils.js) - будет удалять записи из БД
 });
 
 //babel-node ./app.js (команда для запуска сервера)
-const server = app.listen(9090, () => {
-    console.log('Server is up and running on port 9090');
+const server = app.listen(3030, () => {
+    console.log('Server is up and running on port 3030');
 });
