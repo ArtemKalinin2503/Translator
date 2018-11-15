@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { translatedAction } from '../reducers';
 import axios from 'axios'; //npm install axios
+
 //Данный компонент будет получать и выводить слова на английском языке   
 class WordTranslate extends Component {
     //Данный компонент сработает до render основного компонентп
@@ -9,7 +10,7 @@ class WordTranslate extends Component {
         this.props.getDataWord(); //Вызываем наш thank thunkWordAction (который записали в getDataWord)
     }
     render() {
-        let wordResult = this.props.translatedWord; //Запишем данное состоние в переменную
+        let wordResult = this.props.translatedWord; //Запишем данное состояние в переменную
         return (
             <div>
                 <p>Перевидете данное слово:</p>
@@ -23,7 +24,7 @@ function thunkWordAction() {
     return (dispatch) => {
         axios.get('http://localhost:3000/data/dataJson.json') //axiso это замена fetch 
         .then((translatedWord) => {
-            dispatch(translatedAction(translatedWord.data[0].WordEnglishArray[0])); //Передадим полученные данные в состояние translatedWord (используя axios данные всегда приходят в data)
+            dispatch(translatedAction(translatedWord.data[0].WordEnglishArray[1])); //Передадим полученные данные в состояние translatedWord (используя axios данные всегда приходят в data)
         },  //translatedAction это наш action который возьмет состояние translatedWord и запишет в него данные 
         (errorResponse) => {
             console.log(errorResponse)

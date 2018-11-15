@@ -1,6 +1,7 @@
 //sudo npm install babel@5 -g (установим babel)
 import express from 'express'; //npm install express
 import bodyParser from 'body-parser'; //npm install body-parser (для преобразования данных в json)
+import cors from 'cors';
 import * as db from './utils/DataBaseUtils.js' //Все что описанно в данном файле мы ипортируем и записываем в переменную db
 
 //Установим соединение с БД (метод setUpConnection мы описали в DataBaseUtils.js)
@@ -11,13 +12,15 @@ const app = express();
 
 //Указываем чтобы данные которые мы получим нужно преобразовать в json
 app.use( bodyParser.json() );
+//Для разрешения кросс доменных запросов 
+app.use( cors({ origin: '*' }) );
 
 //Запрос get будет брать данные из БД word
 app.get('/word', (req,res) => {
     db.listWord().then(data => res.send(data)); //Запрос listWord (описаный в DataBaseUtils.js) - будет выводить все поля из БД (мы его описали в DataBaseUtils.js)
 });
 
-//Запрос post будет добавлять данные из БД word
+//Запрос post будет добавлять данные из БД word (чтобы запрос отработал нужно будет его вызвать)
 app.post('/word', (req,res) => {
     console.log('!!!!!!!');
     db.createWord(req.body).then(data => res.send(data)); //Запрос createWord (описаный в DataBaseUtils.js) - будет создавать тело запроса и записывать результат
